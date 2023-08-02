@@ -12,7 +12,7 @@ const ItemCard = ({ item }) => {
       <li>
         Toppings:
         {toppings.map((topping) => (
-          <li> ,{topping} </li>
+          <li> {topping} </li>
         ))}
       </li>
     </div>

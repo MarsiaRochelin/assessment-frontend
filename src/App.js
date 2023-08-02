@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+// import Container from "./components/Container/Container";
+import Loading from "./components/Loading/Loading";
+import Error from "./components/Error/Error";
+import Menu from "./components/Menu/Menu";
+
+//TODO: add to .env file
+const API_URL = "http://localhost:8887";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [menuData, setMenuData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const res = await fetch(`${API_URL}/items`);
+        const json = await res.json();
+        const { data, error } = json;
+        if (res.ok) {
+          setMenuData(data);
+          setLoading(false);
+        } else {
+          setError(error);
+          setLoading(false);
+        }
+      } catch (err) {
+        setLoading(false);
+        setError(err.message);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const renderContent = () => {
+    if (loading) {
+      return <Loading />;
+    } else if (error) {
+      return <Error error={error} />;
+    } else {
+      return <Menu menuData={menuData} />;
+    }
+  };
+
+  return <div className="App">{renderContent()}</div>;
 }
 
 export default App;

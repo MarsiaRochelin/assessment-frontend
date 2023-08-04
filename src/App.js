@@ -45,6 +45,8 @@ function App() {
     }
   };
 
+  //when error and loading state is truthy my container component isn't centering my content WHY?
+
   return (
     <div className="App">
       <Container center={Boolean(error || loading)}>

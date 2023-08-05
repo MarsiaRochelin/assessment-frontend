@@ -7,19 +7,18 @@ const ItemCard = ({ item }) => {
   //if toppings length is equal to zero show no text content for toppings
   //else return text content for toppings followed bu a colon seperated by a space listing out each toppings seperated by a comma and a sapce for each item in the toppings array aceept the last one
 
+  //add a space between the toppings text content and the topping
+
   return (
     <div className="ItemCard">
       <h1>{name}</h1>
       <li>{shortDescription} </li>
       <br />
       <img src={image} alt={name} />
-      {/* <br /> */}
-      <li>{price}</li>
+      <li className="line-break">{price}</li>
       <li>
         Toppings:
-        {toppings.map((topping) => (
-          <li> {topping}</li>
-        ))}
+        {toppings.join(", ")}
       </li>
     </div>
   );

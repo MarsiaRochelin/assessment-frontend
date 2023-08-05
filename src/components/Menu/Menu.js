@@ -3,11 +3,13 @@ import ItemCard from "../ItemCard/ItemCard";
 
 const Menu = ({ menuData }) => {
   return (
-    <div className="Menu">
+    <div className="Header">
       <h1>Our menu</h1>
-      {menuData.map((item) => (
-        <ItemCard key={item.id} item={item} />
-      ))}
+      <div className="Menu">
+        {menuData.map((item) => (
+          <ItemCard key={item.id} item={item} />
+        ))}
+      </div>
     </div>
   );
 };

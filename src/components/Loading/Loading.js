@@ -1,5 +1,7 @@
+import "./Loading.css";
+
 const Loading = () => {
-  return <div className="Loading">Loading...</div>;
+  return <div className="Loading">Loading Items...</div>;
 };
 
 export default Loading;
